@@ -1,6 +1,6 @@
 #-------------------------------------------------------------------------
-# AUTHOR: your name
-# FILENAME: title of the source file
+# AUTHOR: Nhat Tran
+# FILENAME: decision_tre.py
 # SPECIFICATION: description of the program
 # FOR: CS 4200- Assignment #1
 # TIME SPENT: how long it took you to complete the assignment
@@ -25,11 +25,39 @@ with open('contact_lens.csv', 'r') as csvfile:
          print(row)
 
 #transform the original training features to numbers and add to the 4D array X. For instance Young = 1, Prepresbyopic = 2, Presbyopic = 3, so X = [[1, 1, 1, 1], [2, 2, 2, 2], ...]]
-#--> add your Python code here
+num_attributes = 4
+dim1, dim2 = (num_attributes, len(db))
+X = [[0 for i in range(dim1)] for j in range(dim2)]
+for k in range(len(db)):
+    for j in range(len(db[k])-1):
+        if db[k][j]=="Young":
+            X[k][j]=1
+        elif db[k][j]=="Prepresbyopic":
+            X[k][j]=2
+        elif db[k][j]=="Presbyopic":
+            X[k][j]=3
+        elif db[k][j] == "Myope":
+            X[k][j] = 1
+        elif db[k][j] == "Hypermetrope":
+            X[k][j] = 2
+        elif db[k][j] == "No":
+            X[k][j] = 2
+        elif db[k][j] == "Yes":
+            X[k][j] = 1
+        elif db[k][j] == "Reduced":
+            X[k][j] = 2
+        elif db[k][j] == "Normal":
+            X[k][j] = 1
+print(X)
 # X =
 
 #transform the original training classes to numbers and add to the vector Y. For instance Yes = 1, No = 2, so Y = [1, 1, 2, 2, ...]
-#--> addd your Python code here
+Y= ["0"] * len(db)
+for k in range(len(db)):
+    if db[k][4] == "No":
+        Y[k] = 2
+    elif db[k][4] == "Yes":
+        Y[k] = 1
 # Y =
 
 #fitting the decision tree to the data
